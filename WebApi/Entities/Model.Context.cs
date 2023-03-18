@@ -15,11 +15,16 @@ namespace WebApi.Entities
     
     public partial class WorldSkillsEntities : DbContext
     {
+        private static WorldSkillsEntities context;
         public WorldSkillsEntities()
             : base("name=WorldSkillsEntities")
         {
         }
-    
+        public static WorldSkillsEntities GetContext() {
+            if (context == null)
+                context = new WorldSkillsEntities();
+            return context;
+        }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
