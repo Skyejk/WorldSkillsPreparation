@@ -17,10 +17,11 @@ namespace WebApi.Controllers
     {
         private WorldSkillsEntities db = new WorldSkillsEntities();
 
-        // GET: api/Users
-        public IQueryable<User> GetUser()
+        //GET: api/Users
+        [ResponseType(typeof(List<ResponseUser>))]
+        public IHttpActionResult GetUser()
         {
-            return db.User;
+            return Ok(db.User.ToList().ConvertAll(p => new ResponseUser(p)));
         }
 
         // GET: api/Users/5
